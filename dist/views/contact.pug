@@ -1,0 +1,72 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    meta(http-equiv="X-UA-Compatible" content="ie=edge")
+    title Contact Us
+    link(href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous")
+    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css")
+    link(rel="stylesheet" href="/public/style.css")
+    
+  body
+    .container
+      .notification#notification
+            if msg
+              p= msg
+      h1.brand
+        span Acme
+        |  Web Design
+      .wrapper.animated.bounceInLeft
+        .company-info
+          h3 Acme Web Design
+          ul
+            li
+              i.fa.fa-road
+              |  123 Main St, Suite 100
+            li
+              i.fa.fa-phone
+              |  (123) 456-7890
+            li
+              i.fa.fa-envelope
+              |  contact@acmecompany.com
+
+        .contact
+          h3 Email Us
+          
+          form(method="POST" action="/send")
+            p
+              label Name
+              input(type="text" name="name" required="required")
+            p
+              label Company
+              input(type="text" name="company" required="required")
+            p
+              label Email Address
+              input(type="email" name="email" required="required")
+            p
+              label Recipient Email
+              input(type="email" name="recipientEmail" required="required")
+            p
+              label Phone Number
+              input(type="text" name="phone" required="required")
+            p.full
+              label Message
+              textarea(name="message" rows="5" required="required")
+            p.full
+              button(type="submit") Submit
+
+    script(src="https://code.jquery.com/jquery-3.6.0.min.js")
+    script.
+      $(document).ready(function() {
+        var msg = "#{msg}";
+        if (msg) {
+          var notification = $('#notification');
+          notification.text(msg).addClass('show');
+          setTimeout(function() {
+            notification.removeClass('show');
+            history.replaceState(null, document.title, window.location.pathname);
+
+          }, 3000); // Hide message after 3 seconds
+        }
+      });
